@@ -1,0 +1,9 @@
+@import './variables.scss';
+
+footer {
+    background-color: var(--secondary);
+    color: var(--text-light);
+    text-align: center;
+    padding: 3rem 2rem;
+    margin-top: 4rem;
+  }

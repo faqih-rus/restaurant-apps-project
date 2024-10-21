@@ -1,0 +1,50 @@
+@import './variables';
+
+.hero {
+  margin-top: 60px;
+  height: 600px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../public/images/heros/hero-image_4.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-light);
+  text-align: center;
+  position: relative;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  padding: 2rem;
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.btn-start {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background-color: var(--primary);
+  color: var(--text-light);
+  text-decoration: none;
+  border-radius: 50px;
+  transition: all 0.3s;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-start:hover {
+  background-color: var(--accent);
+  transform: translateY(-3px);
+}
