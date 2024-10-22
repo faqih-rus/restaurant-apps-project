@@ -1,7 +1,4 @@
-@import './global';
-@import './header';
-@import './hero';
-@import './explore';
-@import './restaurant';
-@import './responsive';
-@import './footer';
+//main.scss
+
+@import './variables.scss';
+@import './restaurant.scss';
