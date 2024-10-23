@@ -1,6 +1,4 @@
-@use './_variables.scss';
-
-/* Reset and Base Styles */
+@use './variables.scss';
 * {
     margin: 0;
     padding: 0;
@@ -16,7 +14,6 @@ body {
 }
 
 
-/* Skip Link */
 .skip-link {
     position: absolute;
     top: -40px;
@@ -24,7 +21,7 @@ body {
     padding: 8px;
     background-color: var(--primary);
     color: var(--text-light);
-    z-index: 100;
+    z-index: 9999;
 }
 
 .skip-link:focus {
@@ -51,7 +48,9 @@ body {
     font-size: 1.5rem;
     font-weight: 600;
 }
-
+.app-bar__brand a {
+    padding-block: 0.7rem;
+}
 .brand {
     text-decoration: none;
     color: var(--primary);
@@ -226,6 +225,12 @@ body {
     padding: 1.5rem;
 }
 
+.restaurant-item__content a {
+    font-size:1rem;
+    padding-block: 0.7rem;
+    font-weight: 1000;
+}
+
 .restaurant-item__title {
     margin-bottom: 0.5rem;
 }
@@ -263,6 +268,14 @@ footer {
     color: var(--accent);
     text-decoration: none;
 }
+
+#footerTools a {
+    padding-block: 0.7rem;
+    padding-inline: 0.3rem;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
 
 /* Restaurant Detail Styles */
 .restaurant-detail {
@@ -573,9 +586,11 @@ footer {
         background: none;
         border: none;
         cursor: pointer;
-        font-size: 2rem;
+        font-size: 1.8rem;
         color: var(--text-dark);
         transition: var(--transition-base);
+        padding-inline:1.8rem;
+        padding-block: 0.5rem;
     }
 
     #hamburgerButton:hover {
@@ -653,5 +668,124 @@ footer {
 
     .hero__title {
         font-size: 2rem;
+    }
+}
+
+@media screen and (max-width: 325px) {
+    .app-bar__brand {
+        font-size: 1.2rem;
+    }
+
+    #hamburgerButton {
+        padding-inline: 1rem;
+        font-size: 1.5rem;
+    }
+
+    
+    .hero__title {
+        font-size: 1.5rem;
+    }
+
+    .hero__tagline {
+        font-size: 1rem;
+    }
+
+    .btn-start {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    
+    .search-form {
+        max-width: 280px;
+    }
+
+    .search-form label {
+        font-size: 1rem;
+    }
+
+    .search-input {
+        padding: 0.8rem;
+    }
+
+
+    .restaurants {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1rem 0;
+    }
+
+    .restaurant-item {
+        margin-inline: 0.5rem;
+    }
+
+    .restaurant-item__thumbnail {
+        height: 160px;
+    }
+
+    .restaurant-item__content {
+        padding: 1rem;
+    }
+
+    .restaurant-item__content a {
+        font-size: 0.9rem;
+    }
+
+    
+    .restaurant-detail {
+        padding: 0.8rem;
+    }
+
+    .restaurant__name {
+        font-size: 1.8rem;
+    }
+
+    .restaurant__image {
+        height: 200px;
+    }
+
+    .restaurant__info-main {
+        padding: 1rem;
+    }
+
+    .menu-section {
+        padding: 1rem;
+    }
+
+
+    .restaurant__reviews {
+        padding: 1rem;
+    }
+
+    .review-form {
+        padding: 1rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        padding: 0.8rem;
+    }
+
+    
+    #likeButtonContainer {
+        bottom: 1rem;
+        right: 1rem;
+    }
+
+    .like {
+        width: 45px;
+        height: 45px;
+    }
+
+    .like i {
+        font-size: 1.2rem;
+    }
+
+
+    .install-button {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+        bottom: 15px;
+        right: 15px;
     }
 }

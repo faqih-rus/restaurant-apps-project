@@ -93,7 +93,6 @@ const Detail = {
             review: reviewInput.value,
           });
 
-          // Clear form
           nameInput.value = '';
           reviewInput.value = '';
         } else {

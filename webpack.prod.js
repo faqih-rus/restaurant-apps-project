@@ -15,20 +15,13 @@ export default merge(common, {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              presets: ['@babel/preset-env'],
-            },
-          },
-        ],
+        use: 'babel-loader',
       },
     ],
   },
   plugins: [
     new WorkboxWebpackPlugin.InjectManifest({
-      swSrc: path.resolve(__dirname, 'src/scripts/sw.js'),
+      swSrc: path.resolve(__dirname, './src/scripts/sw.js'),
       swDest: 'sw.bundle.js',
     }),
   ],
