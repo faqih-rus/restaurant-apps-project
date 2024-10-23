@@ -4,9 +4,10 @@ const createRestaurantDetailTemplate = (restaurant) => `
   <div class="restaurant-detail">
     <div class="restaurant-detail__header">
       <h2 class="restaurant__name">${restaurant.name || 'N/A'}</h2>
-      <img class="restaurant__image lazyload" 
-           src="${CONFIG.BASE_IMAGE_URL_MEDIUM + (restaurant.pictureId || '')}" 
-           alt="${restaurant.name || 'Restaurant Image'}" />
+      <img class="restaurant__image lazyload"
+           src="${CONFIG.BASE_IMAGE_URL_MEDIUM + (restaurant.pictureId || '')}"
+           alt="${restaurant.name || 'Restaurant Image'}"
+           crossorigin="anonymous" />
     </div>
 
     <div class="restaurant__info">
@@ -93,7 +94,8 @@ const createRestaurantItemTemplate = (restaurant) => `
     <div class="restaurant-item__header">
       <img class="restaurant-item__thumbnail"
            src="${CONFIG.BASE_IMAGE_URL_SMALL + (restaurant.pictureId || '')}"
-           alt="${restaurant.name || 'Restaurant Image'}">
+           alt="${restaurant.name || 'Restaurant Image'}"
+           crossorigin="anonymous">
       <div class="restaurant-item__rating">
         <p>⭐️<span class="rating-score">${restaurant.rating || 'N/A'}</span></p>
       </div>

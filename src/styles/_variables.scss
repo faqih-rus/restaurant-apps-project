@@ -1,5 +1,5 @@
 :root {
-  // Colors
+  /* Colors */
   --primary: #FF4B3E;
   --secondary: #2D2D2A;
   --accent: #FF9B3E;
@@ -7,16 +7,16 @@
   --text-dark: #2D2D2A;
   --text-light: #FAF7F0;
   
-  // Layout
+  /* Layout */
   --header-height: 64px;
   --container-padding: 1rem;
   --section-spacing: 4rem;
   --border-radius: 12px;
   
-  // Shadows
+  /* Shadows */
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
   
-  // Transitions
+  /* Transitions */
   --transition-base: all 0.3s ease;
 }
