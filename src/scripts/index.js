@@ -1,6 +1,6 @@
-import 'regenerator-runtime'; 
-import '../styles/main.scss'
-import App from '../scripts/view/app.js'; 
+import 'regenerator-runtime';
+import '../styles/main.scss';
+import App from '../scripts/view/app.js';
 import swRegister from '../scripts/utils/sw-register.js';
 
 
@@ -16,7 +16,7 @@ window.addEventListener('hashchange', () => {
 
 window.addEventListener('load', async () => {
   try {
-    await app.renderPage(); 
+    await app.renderPage();
     await swRegister();
   } catch (error) {
     console.error('Error during initialization:', error);
