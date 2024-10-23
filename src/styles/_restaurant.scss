@@ -1,4 +1,4 @@
-@import './_variables.scss';
+@use './_variables.scss';
 
 /* Reset and Base Styles */
 * {
@@ -14,6 +14,7 @@ body {
     background-color: var(--bg-light);
     color: var(--text-dark);
 }
+
 
 /* Skip Link */
 .skip-link {
@@ -56,17 +57,30 @@ body {
     color: var(--primary);
 }
 
+.app-bar__navigation {
+    display: flex;
+    gap: 2rem;
+}
+
 .app-bar__navigation ul {
     display: flex;
     list-style: none;
     gap: 2rem;
+    margin: 0;
+    padding: 0;
 }
 
 .app-bar__navigation a {
     text-decoration: none;
+    display: inline-block;
     color: var(--text-dark);
     font-weight: 500;
     transition: var(--transition-base);
+    padding: 1rem 1.5rem;
+}
+
+.app-bar__navigation a:hover {
+    color: var(--primary);
 }
 
 .app-bar__navigation a:hover {
@@ -121,6 +135,25 @@ body {
 }
 
 /* Explore Section */
+
+.search-section {
+    background: var(--bg-light);
+    padding: var(--section-spacing) 0;
+}
+
+.search-form {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.search-form label {
+    font-size: 1.2rem;
+    font-weight: 1000;
+    align-items:center;
+}
 .explore-section {
     padding: var(--section-spacing) var(--container-padding);
 }
@@ -506,8 +539,34 @@ footer {
     color: white;
 }
 
+.install-button {
+    display: none; /* Hidden by default */
+    padding: 10px 20px;
+    background-color: #D84315;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+  
+.install-button:hover {
+    background-color: #bf360c;
+}
+
 /* Responsive Design */
 @media screen and (max-width: 768px) {
+
+    .search-section {
+        padding: var(--section-spacing) var(--container-padding);
+    }
+
+    .search-form {
+        max-width:400px;
+    }
 
     #hamburgerButton {
         display: block;
@@ -596,5 +655,3 @@ footer {
         font-size: 2rem;
     }
 }
-
-

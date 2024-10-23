@@ -103,7 +103,9 @@ const createRestaurantItemTemplate = (restaurant) => `
         <a href="#/detail/${restaurant.id}">${restaurant.name || 'N/A'}</a>
       </h3>
       <p class="restaurant-item__city">${restaurant.city || 'Unknown'}</p>
-      <p class="restaurant-item__description">${restaurant.description || 'No description available'}</p>
+      <p class="restaurant-item__description">
+        ${restaurant.description || 'No description available'}
+      </p>
     </div>
   </div>
 `;

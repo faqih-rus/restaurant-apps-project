@@ -1,84 +1,87 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Discover and explore the best restaurants for your family">
-  <meta name="theme-color" content="#A5B68D">
-  <meta name="keywords" content="restaurants, explore, family dining, food, top restaurants">
-
-  <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
-  <link rel="icon" href="./favicon.png">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="manifest" href="./app.webmanifest">
-  <script src="https://use.fontawesome.com/b070c8f1df.js"></script>
-
-  <title>YASEBA - Restaurant Apps</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover and explore the best restaurants for your family">
+    <meta name="theme-color" content="#DB0000"/>
+    <meta name="keywords" content="restaurants, explore, family dining, food, top restaurants">
+    
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    <link rel="icon" href="./favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="manifest" href="./app.webmanifest">
+    <script src="https://use.fontawesome.com/b070c8f1df.js"></script>
+    <title>YASEBA - Restaurant Apps</title>
 </head>
 <body>
-  <a href="#mainContent" class="skip-link">Skip to content</a>
+    <!-- Pindahkan skip link ke sini dan target ke content-target -->
+    <a href="#content-target" class="skip-link">Skip to content</a>
+    
+    <header>
+        <!-- Navigation Section -->
+        <nav class="app-bar" aria-label="Main navigation">
+            <div class="app-bar__menu">
+                <button id="hamburgerButton" aria-label="Menu">☰</button>
+            </div>
+            <div class="app-bar__brand">
+                <a href="/" class="brand" aria-label="Homepage">YASEBA</a>
+            </div>
+            <div id="navigationDrawer" class="app-bar__navigation">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="#/favorite">Favorite</a></li>
+                    <li><a href="https://linkedin.com/in/mfaqihs2003">About Us</a></li>
+                </ul>
+            </div>
+        </nav>
 
-  <!-- Header Section -->
-  <header class="app-bar">
-    <div class="app-bar__menu">
-      <button id="hamburgerButton" aria-label="Menu">☰</button>
-    </div>
-    <div class="app-bar__brand">
-      <a href="/" class="brand" aria-label="Homepage">YASEBA</a>
-    </div>
-    <nav id="navigationDrawer" class="app-bar__navigation" aria-label="Main navigation">
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="#/favorite">Favorite</a></li>
-        <li><a href="https://linkedin.com/in/mfaqihs2003">About Us</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <!-- Hero Section -->
-  <section class="hero" aria-labelledby="hero-title">
-    <div class="hero-content">
-      <h1 id="hero-title" class="hero__title">Discover and explore the best restaurants for your family</h1>
-      <p class="hero__tagline">Find the best restaurants in your city</p>
-      <button class="btn-start" aria-label="Start exploring">Start Exploring</button>
-    </div>
-  </section>
-
-  <!-- Explore Section -->
-  <section class="explore-section">
-    <div class="container">
-      <div class="section-header">
-        <h2>Explore Restaurant</h2>
-        <div class="search-container">
-          <input 
-            type="text" 
-            id="searchRestaurant" 
-            class="search-input" 
-            placeholder="Search restaurant"
-            aria-label="Search restaurants"
-          >
+        <!-- Hero Section -->
+        <div class="hero" aria-labelledby="hero-title">
+            <div class="hero-content">
+                <h1 id="hero-title" class="hero__title">Discover and explore the best restaurants for your family</h1>
+                <p class="hero__tagline">Find the best restaurants in your city</p>
+                <button class="btn-start" aria-label="Start exploring">Start Exploring</button>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Main Content -->
-  <main id="mainContent">
-    <div class="restaurant-detail">
-      <!-- Content will be loaded here -->
-    </div>
-  </main>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <div id="footerTools">
-          <p>Explore more at <a href="https://dicoding.com" target="_blank" rel="noreferrer noopener">Dicoding</a></p>
+        <!-- Search Section -->
+        <div class="search-section" role="search">
+            <form class="search-form" action="#" method="get">
+                <label for="searchRestaurant" class="visually-hidden">Search for restaurants</label>
+                <input
+                    type="search"
+                    id="searchRestaurant"
+                    class="search-input"
+                    placeholder="Search restaurant"
+                    aria-label="Search restaurants"
+                >
+            </form>
         </div>
-        <p class="copyright">Copyright © 2024 - YASEBA</p>
-      </div>
-    </div>
-  </footer>
+    </header>
+
+    <main id="mainContent">
+        <!-- Tambahkan div dengan id content-target sebagai target skip link -->
+        <div id="content-target" tabindex="-1">
+            <!-- Restaurant List Section -->
+            <section class="restaurant-list" aria-labelledby="restaurant-heading">
+                <h2 id="restaurant-heading">Explore Restaurant</h2>
+                <div class="restaurant-detail">
+                    <!-- Content will be loaded here -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div id="footerTools">
+                    <p>Explore more at <a href="https://dicoding.com" target="_blank" rel="noreferrer noopener">Dicoding</a></p>
+                </div>
+                <p class="copyright">Copyright © 2024 - YASEBA</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

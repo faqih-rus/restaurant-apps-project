@@ -46,7 +46,7 @@ const Detail = {
 
   _initReviewForm(restaurantId) {
     const reviewForm = document.querySelector('#reviewForm');
-    if (!reviewForm) return;
+    if (!reviewForm) {return;}
 
     reviewForm.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -112,17 +112,17 @@ const Detail = {
 
   _addNewReviewToDOM(review) {
     const reviewsContainer = document.querySelector('.reviews-list');
-    if (!reviewsContainer) return;
+    if (!reviewsContainer) {return;}
 
     const newReviewHTML = `
       <div class="review-item">
         <div class="review-header">
           <h4>${review.name}</h4>
           <span class="review-date">${new Date().toLocaleDateString('id-ID', {
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric',
-          })}</span>
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  })}</span>
         </div>
         <p class="review-text">${review.review}</p>
       </div>

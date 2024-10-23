@@ -1,7 +1,8 @@
-import 'regenerator-runtime/runtime.js';
-import '../styles/main.scss';
-import App from '../scripts/view/app.js';
+import 'regenerator-runtime'; 
+import '../styles/main.scss'
+import App from '../scripts/view/app.js'; 
 import swRegister from '../scripts/utils/sw-register.js';
+
 
 const app = new App({
   button: document.querySelector('#hamburgerButton'),
@@ -13,7 +14,11 @@ window.addEventListener('hashchange', () => {
   app.renderPage();
 });
 
-window.addEventListener('load', () => {
-  app.renderPage();
-  swRegister();
+window.addEventListener('load', async () => {
+  try {
+    await app.renderPage(); 
+    await swRegister();
+  } catch (error) {
+    console.error('Error during initialization:', error);
+  }
 });

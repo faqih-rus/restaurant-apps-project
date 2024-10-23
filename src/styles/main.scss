@@ -1,4 +1,4 @@
 //main.scss
 
-@import './variables.scss';
-@import './restaurant.scss';
+@use './variables';
+@use './restaurant';
