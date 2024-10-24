@@ -14,11 +14,7 @@ window.addEventListener('hashchange', () => {
   app.renderPage();
 });
 
-window.addEventListener('load', async () => {
-  try {
-    await app.renderPage();
-    await swRegister();
-  } catch (error) {
-    console.error('Error during initialization:', error);
-  }
+window.addEventListener('load', () => {
+  app.renderPage();
+  swRegister();
 });

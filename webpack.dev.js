@@ -1,13 +1,16 @@
-import path from 'path';
 import { merge } from 'webpack-merge';
-import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import common from './webpack.common.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default merge(common, {
   mode: 'development',
   devtool: 'inline-source-map',
   devServer: {
-    static: path.resolve(path.dirname(new URL(import.meta.url).pathname), 'dist'),
+    static: path.resolve(__dirname, 'dist'),
     open: true,
     port: 9000,
     client: {
@@ -18,7 +21,4 @@ export default merge(common, {
     },
     compress: true,
   },
-  plugins: [
-    new CleanWebpackPlugin(),
-  ],
 });

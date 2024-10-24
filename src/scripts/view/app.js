@@ -27,10 +27,12 @@ class App {
     await page.afterRender();
 
     const skipLinkEl = document.querySelector('.skip-link');
-    skipLinkEl.addEventListener('click', (event) => {
-      event.preventDefault();
-      document.querySelector('#mainContent').focus();
-    });
+    if (skipLinkEl) {
+      skipLinkEl.addEventListener('click', (event) => {
+        event.preventDefault();
+        document.querySelector('#mainContent').focus();
+      });
+    }
     ScrollInitiator.init();
   }
 }
