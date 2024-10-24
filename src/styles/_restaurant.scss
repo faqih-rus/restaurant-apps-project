@@ -13,7 +13,6 @@ body {
     color: var(--text-dark);
 }
 
-
 .skip-link {
     position: absolute;
     top: -40px;
@@ -54,6 +53,11 @@ body {
 .brand {
     text-decoration: none;
     color: var(--primary);
+    padding: 12px;
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
 }
 
 .app-bar__navigation {
@@ -75,11 +79,11 @@ body {
     color: var(--text-dark);
     font-weight: 500;
     transition: var(--transition-base);
-    padding: 1rem 1.5rem;
-}
-
-.app-bar__navigation a:hover {
-    color: var(--primary);
+    padding: 12px 22px; /* Increased padding to ensure 44px minimum */
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
 }
 
 .app-bar__navigation a:hover {
@@ -119,14 +123,15 @@ body {
 }
 
 .btn-start {
-    padding: 1rem 2rem;
+    padding: 12px 24px;
     background-color: var(--primary);
     color: var(--text-light);
     border: none;
     cursor: pointer;
     font-size: 1rem;
     transition: var(--transition-base);
-    padding-block:1rem;
+    min-height: 44px;
+    min-width: 44px;
 }
 
 .btn-start:hover {
@@ -174,10 +179,11 @@ body {
 
 .search-input {
     width: 100%;
-    padding: 1rem;
+    padding: 12px;
     border: 1px solid #ddd;
     border-radius: var(--border-radius);
     font-size: 1rem;
+    min-height: 44px;
 }
 
 /* Restaurant Cards */
@@ -275,7 +281,6 @@ footer {
     font-size: 1rem;
     font-weight: 1000;
 }
-
 
 /* Restaurant Detail Styles */
 .restaurant-detail {
@@ -437,11 +442,12 @@ footer {
 .form-group input,
 .form-group textarea {
     width: 100%;
-    padding: 1rem;
+    padding: 12px;
     border: 1px solid #ddd;
     border-radius: var(--border-radius);
     font-size: 1rem;
     transition: var(--transition-base);
+    min-height: 44px;
 }
 
 .form-group input:focus,
@@ -458,7 +464,7 @@ footer {
 
 .submit-review {
     width: 100%;
-    padding: 1rem;
+    padding: 12px;
     background: var(--primary);
     color: white;
     border: none;
@@ -466,6 +472,7 @@ footer {
     font-size: 1rem;
     cursor: pointer;
     transition: var(--transition-base);
+    min-height: 44px;
 }
 
 .submit-review:hover {
@@ -474,7 +481,7 @@ footer {
 }
 
 #searchButton {
-    padding: 1rem 2rem;
+    padding: 12px 24px;
     background: var(--primary);
     color: var(--text-light);
     border: none;
@@ -482,6 +489,7 @@ footer {
     cursor: pointer;
     font-size: 1rem;
     transition: var(--transition-base);
+    min-height: 44px;
 }
 
 /* Reviews List */
@@ -533,8 +541,8 @@ footer {
 }
 
 .like {
-    width: 55px;
-    height: 55px;
+    width: 44px;
+    height: 44px;
     background: var(--primary);
     border: none;
     border-radius: 50%;
@@ -571,8 +579,9 @@ footer {
         font-size: 1.8rem;
         color: var(--text-dark);
         transition: var(--transition-base);
-        padding-inline:1.8rem;
-        padding-block: 0.5rem;
+        padding: 12px;
+        min-height: 44px;
+        min-width: 44px;
     }
 
     #hamburgerButton:hover {
@@ -654,120 +663,68 @@ footer {
 }
 
 @media screen and (max-width: 325px) {
-    .app-bar__brand {
-        font-size: 1.2rem;
-    }
-
-    #hamburgerButton {
-        padding-inline: 1rem;
-        font-size: 1.5rem;
-    }
-
-    
-    .hero__title {
-        font-size: 1.5rem;
-    }
-
-    .hero__tagline {
-        font-size: 1rem;
-    }
-
-    .btn-start {
-        padding: 0.8rem 1.5rem;
-        font-size: 0.9rem;
-    }
-
-    
-    .search-form {
-        max-width: 280px;
-    }
-
-    .search-form label {
-        font-size: 1rem;
-    }
-
-    .search-input {
-        padding: 0.8rem;
-    }
-
-
     .restaurants {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
-        padding: 1rem 0;
+        gap: 1rem;
+        padding: 0.5rem;
+        margin: 0;
+        width: 100%;
     }
 
     .restaurant-item {
-        margin-inline: 0.5rem;
-    }
-
-    .restaurant-item__thumbnail {
-        height: 160px;
+        margin: 0;
+        width: 100%;
+        max-width: 100%;
     }
 
     .restaurant-item__content {
         padding: 1rem;
     }
 
-    .restaurant-item__content a {
-        font-size: 0.9rem;
+    /* Ensure content doesn't overflow */
+    .content {
+        padding: 0 1rem;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
     }
 
-    
+    /* Adjust search form for smaller screens */
+    .search-form {
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+
+    .search-input {
+        width: 100%;
+    }
+
+    /* Adjust restaurant detail view */
     .restaurant-detail {
-        padding: 0.8rem;
-    }
-
-    .restaurant__name {
-        font-size: 1.8rem;
-    }
-
-    .restaurant__image {
-        height: 200px;
+        padding: 1rem;
+        margin: 0;
+        width: 100%;
     }
 
     .restaurant__info-main {
-        padding: 1rem;
+        padding: 0.75rem;
     }
 
     .menu-section {
-        padding: 1rem;
+        padding: 0.75rem;
     }
 
-
-    .restaurant__reviews {
-        padding: 1rem;
-    }
-
+    /* Adjust review section */
     .review-form {
+        padding: 0.75rem;
+        margin: 1rem;
+    }
+
+    .reviews-list {
+        padding: 0 0.5rem;
+    }
+
+    .review-item {
         padding: 1rem;
-    }
-
-    .form-group input,
-    .form-group textarea {
-        padding: 0.8rem;
-    }
-
-    
-    #likeButtonContainer {
-        bottom: 1rem;
-        right: 1rem;
-    }
-
-    .like {
-        width: 45px;
-        height: 45px;
-    }
-
-    .like i {
-        font-size: 1.2rem;
-    }
-
-
-    .install-button {
-        padding: 8px 16px;
-        font-size: 0.9rem;
-        bottom: 15px;
-        right: 15px;
     }
 }

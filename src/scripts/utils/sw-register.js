@@ -1,26 +1,17 @@
-// sw-register.js
+import * as WorkboxWindow from 'workbox-window';
+
 const swRegister = async () => {
-  if ('serviceWorker' in navigator) {
-    try {
-      const registration = await navigator.serviceWorker.register('/sw.bundle.js', {
-        scope: '/',
-      });
+  if (!('serviceWorker' in navigator)) {
+    console.log('Service Worker not supported in the browser');
+    return;
+  }
 
-      console.log('SW registered with scope:', registration.scope);
-
-      registration.addEventListener('updatefound', () => {
-        const newWorker = registration.installing;
-        console.log('Service Worker update found!');
-
-        newWorker.addEventListener('statechange', () => {
-          console.log('Service Worker state:', newWorker.state);
-        });
-      });
-    } catch (error) {
-      console.error('SW registration failed:', error);
-    }
-  } else {
-    console.log('Service Worker tidak didukung di browser ini');
+  const wb = new WorkboxWindow.Workbox('/sw.bundle.js');
+  try {
+    await wb.register();
+    console.log('Service worker registered');
+  } catch (error) {
+    console.log('Failed to register service worker', error);
   }
 };
 

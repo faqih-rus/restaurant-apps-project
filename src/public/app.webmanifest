@@ -1,9 +1,9 @@
 {
-  "id": "restaurant-lite-pwa-1",
+  "id": "restaurant-catalogue-lite-pwa-1",
   "start_url": "./index.html",
-  "name": "Restaurant Lite PWA",
+  "name": "Restaurant Catalogue Lite",
   "short_name": "Restaurant Lite",
-  "description": "Restaurant catalogue lite progressive web app",
+  "description": "Free Catalogue Restaurant for you",
   "display": "standalone",
   "background_color": "#FFFFFF",
   "theme_color": "#D84315",

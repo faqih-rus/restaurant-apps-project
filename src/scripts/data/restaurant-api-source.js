@@ -1,49 +1,113 @@
+// restaurant-api-source.js
+import API_ENDPOINT from '../globals/api-endpoint.js';
 import CONFIG from '../globals/config.js';
 
-class RestaurantApiSource {
-  static async fetchData(url, options = {}) {
+class RestaurantSource {
+  static async listRestaurants() {
     try {
-      const response = await fetch(url, options);
+      const response = await fetch(API_ENDPOINT.LIST_RESTAURANTS);
       if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
+
       const responseJson = await response.json();
-      return responseJson;
+
+      if (!responseJson.error && responseJson.restaurants) {
+        return responseJson.restaurants;
+      } else {
+        throw new Error('Struktur respons tidak valid dari API');
+      }
     } catch (error) {
-      console.error(`Failed to fetch data from ${url}:`, error);
-      return null;
+      console.error('Error fetching restaurants:', error);
+
+      try {
+        const cache = await caches.open(CONFIG.CACHE_NAME);
+        const cachedResponse = await cache.match(API_ENDPOINT.LIST_RESTAURANTS);
+
+        if (cachedResponse) {
+          const cachedData = await cachedResponse.json();
+          return cachedData.restaurants;
+        }
+      } catch (cacheError) {
+        console.error('Error fetching from cache:', cacheError);
+      }
+
+      throw new Error('Gagal mengambil data restoran dari jaringan dan cache');
     }
   }
 
-  static async listRestaurants() {
-    const url = `${CONFIG.BASE_URL}${CONFIG.API_ENDPOINTS.LIST}`;
-    const response = await this.fetchData(url);
-    return response ? response.restaurants : [];
-  }
-
   static async detailRestaurant(id) {
-    const url = `${CONFIG.BASE_URL}${CONFIG.API_ENDPOINTS.DETAIL(id)}`;
-    const response = await this.fetchData(url);
-    return response ? response.restaurant : null;
-  }
+    try {
+      const response = await fetch(API_ENDPOINT.DETAIL_RESTAURANT(id));
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
-  static async searchRestaurant(query) {
-    const url = `${CONFIG.BASE_URL}${CONFIG.API_ENDPOINTS.SEARCH(query)}`;
-    const response = await this.fetchData(url);
-    return response ? response.restaurants : [];
+      const responseJson = await response.json();
+
+      if (!responseJson.error && responseJson.restaurant) {
+        return responseJson.restaurant;
+      } else {
+        throw new Error('Struktur respons tidak valid dari API');
+      }
+    } catch (error) {
+      console.error(`Error fetching restaurant detail for ID: ${id}`, error);
+
+      try {
+        const cache = await caches.open(CONFIG.CACHE_NAME);
+        const cachedResponse = await cache.match(API_ENDPOINT.DETAIL_RESTAURANT(id));
+
+        if (cachedResponse) {
+          const cachedData = await cachedResponse.json();
+          return cachedData.restaurant;
+        }
+      } catch (cacheError) {
+        console.error('Error fetching from cache:', cacheError);
+      }
+
+      throw new Error(`Gagal mengambil detail restoran dengan ID: ${id} dari jaringan dan cache`);
+    }
   }
 
   static async postReview(review) {
-    const url = `${CONFIG.BASE_URL}${CONFIG.API_ENDPOINTS.REVIEW}`;
-    const response = await this.fetchData(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(review),
-    });
-    return response ? response.customerReviews : null;
+    try {
+      const response = await fetch(API_ENDPOINT.POST_REVIEW, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(review),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const responseJson = await response.json();
+
+      if (!responseJson.error) {
+        return responseJson;
+      } else {
+        throw new Error(responseJson.message || 'Gagal mengirimkan ulasan');
+      }
+    } catch (error) {
+      console.error('Error posting review:', error);
+
+      const offlineReviews = JSON.parse(localStorage.getItem('offlineReviews') || '[]');
+      offlineReviews.push(review);
+      localStorage.setItem('offlineReviews', JSON.stringify(offlineReviews));
+
+      if ('serviceWorker' in navigator && 'SyncManager' in window) {
+        const sw = await navigator.serviceWorker.ready;
+        await sw.sync.register('sync-reviews');
+      }
+
+      return {
+        error: false,
+        message: 'Ulasan disimpan secara offline. Akan dikirim ketika online.',
+      };
+    }
   }
 }
 
-export default RestaurantApiSource;
+export default RestaurantSource;

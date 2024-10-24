@@ -92,8 +92,10 @@ const createRestaurantItemTemplate = (restaurant) => `
   <div class="restaurant-item">
     <div class="restaurant-item__header">
       <img class="restaurant-item__thumbnail"
-           src="${CONFIG.BASE_IMAGE_URL_SMALL + (restaurant.pictureId || '')}"
-           alt="${restaurant.name || 'Restaurant Image'}">
+           src="${restaurant.pictureId ? CONFIG.BASE_IMAGE_URL_SMALL + restaurant.pictureId : 'path/to/anonymous-image.jpg'}"
+           alt="${restaurant.name || 'Restaurant Image'}"
+           crossorigin="anonymous"
+           onload="this.setAttribute('data-loaded', 'true')">
       <div class="restaurant-item__rating">
         <p>⭐️<span class="rating-score">${restaurant.rating || 'N/A'}</span></p>
       </div>

@@ -1,71 +1,58 @@
-// sw.js
-import 'regenerator-runtime';
-import { precacheAndRoute } from 'workbox-precaching';
-import { registerRoute } from 'workbox-routing';
-import { StaleWhileRevalidate, CacheFirst } from 'workbox-strategies';
-import { CacheableResponsePlugin } from 'workbox-cacheable-response';
-import { ExpirationPlugin } from 'workbox-expiration';
-import CONFIG from '../scripts/globals/config.js';
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/6.4.1/workbox-sw.js');
 
-// Precache manifest
+// Set configuration for workbox
+workbox.setConfig({
+  debug: true,
+});
+
+const { precaching, routing, strategies } = workbox;
+const { precacheAndRoute } = precaching;
+const { registerRoute } = routing;
+const { StaleWhileRevalidate } = strategies;
+
+// Do precaching
 precacheAndRoute(self.__WB_MANIFEST);
 
-// Cache untuk assets statis
-registerRoute(
-  ({ request }) => request.destination === 'style' ||
-                   request.destination === 'script' ||
-                   request.destination === 'image',
-  new CacheFirst({
-    cacheName: 'assets-cache',
-    plugins: [
-      new CacheableResponsePlugin({
-        statuses: [0, 200],
-      }),
-      new ExpirationPlugin({
-        maxEntries: 60,
-        maxAgeSeconds: 30 * 24 * 60 * 60, // 30 hari
-      }),
-    ],
-  })
-);
-
-// Cache untuk API requests
-registerRoute(
-  ({ url }) => url.origin === CONFIG.BASE_URL,
-  new StaleWhileRevalidate({
-    cacheName: 'api-cache',
-    plugins: [
-      new CacheableResponsePlugin({
-        statuses: [0, 200],
-      }),
-      new ExpirationPlugin({
-        maxEntries: 30,
-        maxAgeSeconds: 24 * 60 * 60, // 1 hari
-      }),
-    ],
-  })
-);
-
-self.addEventListener('install', (event) => {
-  console.log('Installing Service Worker ...');
+self.addEventListener('install', () => {
+  console.log('Service Worker: Installed');
   self.skipWaiting();
 });
 
-self.addEventListener('activate', (event) => {
-  console.log('Activating Service Worker ...');
-  event.waitUntil(
-    Promise.all([
-      self.clients.claim(),
-      // Hapus cache lama
-      caches.keys().then((cacheNames) => {
-        return Promise.all(
-          cacheNames.map((cacheName) => {
-            if (!['assets-cache', 'api-cache'].includes(cacheName)) {
-              return caches.delete(cacheName);
-            }
-          })
-        );
-      })
-    ])
-  );
+self.addEventListener('push', (event) => {
+  console.log('Service Worker: Pushed');
+
+  const dataJson = event.data.json();
+  const notification = {
+    title: dataJson.title,
+    options: {
+      body: dataJson.options.body,
+      icon: dataJson.options.icon,
+      image: dataJson.options.image,
+    },
+  };
+
+  event.waitUntil(self.registration.showNotification(notification.title, notification.options));
 });
+
+self.addEventListener('notificationclick', (event) => {
+  const clickedNotification = event.notification;
+  clickedNotification.close();
+
+  const chainPromise = async () => {
+    console.log('Notification has been clicked');
+    await self.clients.openWindow('https://www.dicoding.com/');
+  };
+
+  event.waitUntil(chainPromise());
+});
+
+const BASE_URL = 'https://restaurant-api.dicoding.dev';
+
+registerRoute(
+  ({ url }) => {
+    return url.href.startsWith(BASE_URL);
+  },
+  new StaleWhileRevalidate({
+    cacheName: 'restaurant-api',
+  }),
+);
