@@ -1,13 +1,9 @@
-import { merge } from 'webpack-merge';
-import common from './webpack.common.js';
-import WorkBoxWebpackPlugin from 'workbox-webpack-plugin';
-import path from 'path';
-import { fileURLToPath } from 'url';
+const { merge } = require('webpack-merge');
+const common = require('./webpack.common.js');
+const WorkBoxWebpackPlugin = require('workbox-webpack-plugin');
+const path = require('path');
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-export default merge(common, {
+module.exports = merge(common, {
   mode: 'production',
   devtool: 'source-map',
   module: {

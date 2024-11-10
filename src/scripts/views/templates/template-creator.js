@@ -92,7 +92,7 @@ const createRestaurantItemTemplate = (restaurant) => `
   <div class="restaurant-item">
     <div class="restaurant-item__header">
       <img class="restaurant-item__thumbnail"
-           src="${restaurant.pictureId ? CONFIG.BASE_IMAGE_URL_SMALL + restaurant.pictureId : 'path/to/anonymous-image.jpg'}"
+           src="${restaurant.pictureId ? CONFIG.BASE_IMAGE_URL_SMALL + restaurant.pictureId : '../../public/images/hero-image_1.jpg'}"
            alt="${restaurant.name || 'Restaurant Image'}"
            crossorigin="anonymous"
            onload="this.setAttribute('data-loaded', 'true')">
