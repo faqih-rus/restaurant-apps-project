@@ -2,6 +2,7 @@ const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
 const WorkBoxWebpackPlugin = require('workbox-webpack-plugin');
 const path = require('path');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = merge(common, {
   mode: 'production',
@@ -27,5 +28,11 @@ module.exports = merge(common, {
       swSrc: path.resolve(__dirname, 'src/scripts/sw.js'),
       swDest: './sw.bundle.js',
     }),
+
+	new BundleAnalyzerPlugin({
+		analyzerMode: 'static',
+		reportFilename: 'bundle-report.html',
+		openAnalyzer: true,
+	  }),
   ],
 });

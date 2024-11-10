@@ -1,6 +1,6 @@
 import RestaurantSource from '../../data/restaurant-api-source.js';
 import { createRestaurantItemTemplate } from '../../views/templates/template-creator.js';
-import Swal from 'sweetalert2';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 const List = {
   async render() {

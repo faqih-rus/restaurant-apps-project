@@ -1,12 +1,28 @@
 import CONFIG from '../../globals/config.js';
 
+// const getResponsiveImageUrl = (pictureId, viewportWidth) => {
+// 	if (!pictureId) return '../../public/images/hero-image_1.jpg';
+// 	return viewportWidth <= 600
+// 	  ? CONFIG.BASE_IMAGE_URL_SMALL + pictureId
+// 	  : CONFIG.BASE_IMAGE_URL_MEDIUM + pictureId;
+// };
+
 const createRestaurantDetailTemplate = (restaurant) => `
   <div class="restaurant-detail">
     <div class="restaurant-detail__header">
       <h2 class="restaurant__name">${restaurant.name || 'N/A'}</h2>
-      <img class="restaurant__image lazyload" 
-           src="${CONFIG.BASE_IMAGE_URL_MEDIUM + (restaurant.pictureId || '')}" 
-           alt="${restaurant.name || 'Restaurant Image'}" />
+      <picture>
+        <source 
+          media="(max-width: 600px)" 
+          srcset="${CONFIG.BASE_IMAGE_URL_SMALL + (restaurant.pictureId || '')}">
+        <source 
+          media="(min-width: 601px)" 
+          srcset="${CONFIG.BASE_IMAGE_URL_MEDIUM + (restaurant.pictureId || '')}">
+        <img class="restaurant__image lazyload" 
+          data-src="${CONFIG.BASE_IMAGE_URL_MEDIUM + (restaurant.pictureId || '')}"
+          src="${CONFIG.BASE_IMAGE_URL_SMALL + (restaurant.pictureId || '')}"
+          alt="${restaurant.name || 'Restaurant Image'}" />
+      </picture>
     </div>
 
     <div class="restaurant__info">
@@ -91,11 +107,20 @@ const createRestaurantDetailTemplate = (restaurant) => `
 const createRestaurantItemTemplate = (restaurant) => `
   <div class="restaurant-item">
     <div class="restaurant-item__header">
-      <img class="restaurant-item__thumbnail"
-           src="${restaurant.pictureId ? CONFIG.BASE_IMAGE_URL_SMALL + restaurant.pictureId : '../../public/images/hero-image_1.jpg'}"
-           alt="${restaurant.name || 'Restaurant Image'}"
-           crossorigin="anonymous"
-           onload="this.setAttribute('data-loaded', 'true')">
+      <picture>
+        <source 
+          media="(max-width: 600px)" 
+          srcset="${restaurant.pictureId ? CONFIG.BASE_IMAGE_URL_SMALL + restaurant.pictureId : '../../public/images/hero-image_1.jpg'}">
+        <source 
+          media="(min-width: 601px)" 
+          srcset="${restaurant.pictureId ? CONFIG.BASE_IMAGE_URL_MEDIUM + restaurant.pictureId : '../../public/images/hero-image_1.jpg'}">
+        <img class="restaurant-item__thumbnail lazyload"
+          data-src="${restaurant.pictureId ? CONFIG.BASE_IMAGE_URL_MEDIUM + restaurant.pictureId : '../../public/images/hero-image_1.jpg'}"
+          src="${restaurant.pictureId ? CONFIG.BASE_IMAGE_URL_SMALL + restaurant.pictureId : '../../public/images/hero-image_1.jpg'}"
+          alt="${restaurant.name || 'Restaurant Image'}"
+          crossorigin="anonymous"
+          onload="this.setAttribute('data-loaded', 'true')">
+      </picture>
       <div class="restaurant-item__rating">
         <p>⭐️<span class="rating-score">${restaurant.rating || 'N/A'}</span></p>
       </div>

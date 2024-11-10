@@ -12,6 +12,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="manifest" href="./app.webmanifest">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
+
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" as="style">
+  <link rel="preload" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" as="style">
+  <link rel="preload" href="../public/images/heros/hero-image_4-small.jpg" as="image" media="(max-width: 768px)">
+  <link rel="preload" href="../public/images/heros/hero-image_4-large.jpg" as="image" media="(min-width: 769px)">
+
   <title>YASEBA - Restaurant Apps</title>
 </head>
 <body>
@@ -34,7 +40,7 @@
       </div>
     </nav>
 
-    <div class="hero" aria-labelledby="hero-title">
+    <div class="hero" loading="lazy" aria-labelledby="hero-title">
       <div class="hero-content">
         <h1 id="hero-title" class="hero__title">Discover and explore the best restaurants for your family</h1>
         <p class="hero__tagline">Find the best restaurants in your city</p>
