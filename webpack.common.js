@@ -4,6 +4,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ImageminWebpackPlugin = require('imagemin-webpack-plugin').default;
 const ImageminMozjpeg = require('imagemin-mozjpeg');
 const TerserPlugin = require('terser-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   entry: {
@@ -64,6 +66,10 @@ module.exports = {
         }),
       ],
     }),
+
+	new MiniCssExtractPlugin({
+		filename: '[name].[contenthash].css',
+	}),
   ],
   optimization: {
     minimize: true,
@@ -77,6 +83,8 @@ module.exports = {
           },
         },
       }),
+
+	  new CssMinimizerPlugin(),
     ],
     splitChunks: {
       chunks: 'all',
