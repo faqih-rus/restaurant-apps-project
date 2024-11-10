@@ -14,14 +14,30 @@ const Detail = {
 
   async afterRender() {
     try {
+      // Show loading state
+      Swal.fire({
+        title: 'Loading...',
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        }
+      });
+
       const url = UrlParser.parseActiveUrlWithoutCombiner();
       const restaurant = await RestaurantSource.detailRestaurant(url.id);
       const restaurantContainer = document.querySelector('#restaurant');
 
+      // Pre-load the image
+      if (restaurant.pictureId) {
+        await this._preloadImage(restaurant.pictureId);
+      }
+
       restaurantContainer.innerHTML = createRestaurantDetailTemplate(restaurant);
+
+      // Close loading only after content and image are loaded
       Swal.close();
 
-      LikeButtonInitiator.init({
+      await LikeButtonInitiator.init({
         likeButtonContainer: document.querySelector('#likeButtonContainer'),
         restaurant: {
           id: restaurant.id,
@@ -44,9 +60,19 @@ const Detail = {
     }
   },
 
+  // Add method to pre-load image
+  _preloadImage(pictureId) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = `https://restaurant-api.dicoding.dev/images/medium/${pictureId}`;
+      img.onload = resolve;
+      img.onerror = reject;
+    });
+  },
+
   _initReviewForm(restaurantId) {
     const reviewForm = document.querySelector('#reviewForm');
-    if (!reviewForm) {return;}
+    if (!reviewForm) return;
 
     reviewForm.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -63,23 +89,21 @@ const Detail = {
         return;
       }
 
-      Swal.fire({
-        title: 'Mengirim Ulasan',
-        text: 'Mohon tunggu sementara ulasan Anda dikirim...',
-        allowOutsideClick: false,
-        didOpen: () => {
-          Swal.showLoading();
-        },
-      });
-
       try {
+        Swal.fire({
+          title: 'Mengirim Ulasan',
+          text: 'Mohon tunggu sementara ulasan Anda dikirim...',
+          allowOutsideClick: false,
+          didOpen: () => {
+            Swal.showLoading();
+          },
+        });
+
         const response = await RestaurantSource.postReview({
           id: restaurantId,
           name: nameInput.value,
           review: reviewInput.value,
         });
-
-        Swal.close();
 
         if (!response.error) {
           Swal.fire({
@@ -111,7 +135,7 @@ const Detail = {
 
   _addNewReviewToDOM(review) {
     const reviewsContainer = document.querySelector('.reviews-list');
-    if (!reviewsContainer) {return;}
+    if (!reviewsContainer) return;
 
     const newReviewHTML = `
       <div class="review-item">

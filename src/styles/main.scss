@@ -1,4 +1,17 @@
 //main.scss
 
+// @use './variables';
+// @use './restaurant';
+
 @use './variables';
-@use './restaurant';
+@use './base';
+@use './header';
+@use './hero';
+@use './search';
+@use './restaurantItem';
+@use './detail';
+@use './menu';
+@use './review';
+@use './button';
+@use './footer';
+@use './responsive';

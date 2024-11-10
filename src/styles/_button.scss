@@ -1,0 +1,79 @@
+// Button base styles
+%button-base {
+	min-height: 44px;
+	min-width: 44px;
+	cursor: pointer;
+	transition: var(--transition-base);
+	border: none;
+}
+
+// Primary button
+.btn-start {
+	@extend %button-base;
+	padding: 12px 24px;
+	background-color: var(--primary);
+	color: var(--text-light);
+	font-size: 1rem;
+}
+
+.btn-start:hover {
+	background-color: var(--accent);
+}
+
+// Search button
+.search-button {
+	@extend %button-base;
+	padding: 12px 24px;
+	background: var(--primary);
+	color: var(--text-light);
+	border-radius: var(--border-radius);
+	font-size: 1rem;
+}
+
+// Submit review button
+.submit-review {
+	@extend %button-base;
+	width: 100%;
+	padding: 12px;
+	background: var(--primary);
+	color: white;
+	border-radius: var(--border-radius);
+	font-size: 1rem;
+}
+
+.submit-review:hover {
+	background: var(--accent);
+	transform: translateY(-2px);
+}
+
+// Like button
+.like {
+	@extend %button-base;
+	width: 44px;
+	height: 44px;
+	background: var(--primary);
+	border-radius: 50%;
+	box-shadow: var(--shadow-md);
+}
+
+.like:hover {
+	transform: scale(1.1);
+}
+
+.like i {
+	font-size: 1.5rem;
+	color: white;
+}
+
+// Hamburger button
+#hamburgerButton {
+	@extend %button-base;
+	background: none;
+	font-size: 1.8rem;
+	color: var(--text-dark);
+	padding: 12px;
+}
+
+#hamburgerButton:hover {
+	color: var(--primary);
+}

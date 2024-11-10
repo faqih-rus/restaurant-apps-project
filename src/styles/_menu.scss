@@ -1,0 +1,80 @@
+// Menu Section Styles
+.restaurant__menus {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 2rem;
+	margin-bottom: 3rem;
+
+	@media screen and (max-width: 768px) {
+		grid-template-columns: 1fr;
+	}
+}
+
+.menu-section {
+	background: white;
+	padding: 2rem;
+	border-radius: var(--border-radius);
+	box-shadow: var(--shadow-sm);
+	transition: var(--transition-base);
+
+	&:hover {
+		box-shadow: var(--shadow-md);
+		transform: translateY(-4px);
+	}
+
+	h4 {
+		color: var(--primary);
+		margin-bottom: 1rem;
+		font-size: 1.2rem;
+		padding-bottom: 0.5rem;
+		border-bottom: 2px solid var(--accent);
+	}
+
+	ul {
+		list-style: none;
+		padding: 0;
+	}
+
+	li {
+		padding: 0.8rem 0;
+		border-bottom: 1px dashed #ddd;
+		transition: var(--transition-base);
+		min-height: 44px;
+		display: flex;
+		align-items: center;
+
+		&:hover {
+			padding-left: 1rem;
+			color: var(--primary);
+		}
+	}
+
+	@media screen and (max-width: 325px) {
+		padding: 0.75rem;
+		
+		h4 {
+			font-size: 1.1rem;
+		}
+
+		li {
+			padding: 0.6rem 0;
+		}
+	}
+}
+
+// Menu Item Card
+.menu-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0.5rem;
+	
+	&__name {
+		font-weight: 500;
+	}
+
+	&__price {
+		color: var(--primary);
+		font-weight: 600;
+	}
+}
