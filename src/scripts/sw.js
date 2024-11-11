@@ -10,6 +10,7 @@ const { precacheAndRoute } = precaching;
 const { registerRoute } = routing;
 const { StaleWhileRevalidate, CacheFirst } = strategies;
 const { CacheableResponsePlugin } = cacheableResponse;
+const { ExpirationPlugin } = self.workbox.expiration;
 
 // Do precaching
 precacheAndRoute(self.__WB_MANIFEST);
@@ -19,6 +20,20 @@ registerRoute(
   ({ request }) => request.mode === 'navigate',
   new StaleWhileRevalidate({
     cacheName: 'pages-cache',
+  })
+);
+
+registerRoute(
+  ({ url }) => url.href === `${BASE_URL}/list`,
+  new CacheFirst({
+	  cacheName: 'restaurant-list-cache',
+	  plugins: [
+      new CacheableResponsePlugin({ statuses: [0, 200] }),
+      new ExpirationPlugin({
+		  maxEntries: 50,
+		  maxAgeSeconds: 7 * 24 * 60 * 60, // 7 Days
+      }),
+	  ],
   })
 );
 
@@ -57,6 +72,17 @@ registerRoute(
         statuses: [0, 200],
       }),
     ],
+  })
+);
+
+// Handle other API requests with StaleWhileRevalidate
+registerRoute(
+  ({ url }) => url.origin === BASE_URL && url.pathname !== '/list',
+  new StaleWhileRevalidate({
+	  cacheName: 'restaurant-api-cache',
+	  plugins: [
+      new CacheableResponsePlugin({ statuses: [0, 200] }),
+	  ],
   })
 );
 
