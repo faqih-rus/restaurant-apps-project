@@ -1,12 +1,5 @@
 import CONFIG from '../../globals/config.js';
 
-// const getResponsiveImageUrl = (pictureId, viewportWidth) => {
-// 	if (!pictureId) return '../../public/images/hero-image_1.jpg';
-// 	return viewportWidth <= 600
-// 	  ? CONFIG.BASE_IMAGE_URL_SMALL + pictureId
-// 	  : CONFIG.BASE_IMAGE_URL_MEDIUM + pictureId;
-// };
-
 const createRestaurantDetailTemplate = (restaurant) => `
   <div class="restaurant-detail">
     <div class="restaurant-detail__header">
@@ -107,7 +100,7 @@ const createRestaurantDetailTemplate = (restaurant) => `
 `;
 
 const createRestaurantItemTemplate = (restaurant) => `
-  <div class="restaurant-item">
+  <div class="restaurant-item hidden">
     <div class="restaurant-item__header">
       <picture>
         <source 

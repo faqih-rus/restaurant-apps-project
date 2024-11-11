@@ -2,6 +2,7 @@ import DrawerInitiator from '../utils/drawer-initiator.js';
 import ScrollInitiator from '../utils/scroll-initiator.js';
 import UrlParser from '../routes/url-parser.js';
 import routes from '../routes/routes.js';
+import observeElements from '../utils/intersection-observer.js';
 
 class App {
   constructor({ button, drawer, content }) {
@@ -32,6 +33,11 @@ class App {
         event.preventDefault();
         document.querySelector('#mainContent').focus();
       });
+    }
+
+    const restaurantItems = document.querySelectorAll('.restaurant-item');
+    if (restaurantItems.length > 0){
+      observeElements(restaurantItems);
     }
     ScrollInitiator.init();
   }
