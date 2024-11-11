@@ -14,13 +14,15 @@ const createRestaurantDetailTemplate = (restaurant) => `
       <picture>
         <source 
           media="(max-width: 600px)" 
-          srcset="${CONFIG.BASE_IMAGE_URL_SMALL + (restaurant.pictureId || '')}">
+          data-srcset="${CONFIG.BASE_IMAGE_URL_SMALL + (restaurant.pictureId || '')}"
+          type="image/jpeg">
         <source 
           media="(min-width: 601px)" 
-          srcset="${CONFIG.BASE_IMAGE_URL_MEDIUM + (restaurant.pictureId || '')}">
+          data-srcset="${CONFIG.BASE_IMAGE_URL_MEDIUM + (restaurant.pictureId || '')}"
+          type="image/jpeg">
         <img class="restaurant__image lazyload" 
           data-src="${CONFIG.BASE_IMAGE_URL_MEDIUM + (restaurant.pictureId || '')}"
-          src="${CONFIG.BASE_IMAGE_URL_SMALL + (restaurant.pictureId || '')}"
+          src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
           alt="${restaurant.name || 'Restaurant Image'}" />
       </picture>
     </div>
@@ -110,16 +112,17 @@ const createRestaurantItemTemplate = (restaurant) => `
       <picture>
         <source 
           media="(max-width: 600px)" 
-          srcset="${restaurant.pictureId ? CONFIG.BASE_IMAGE_URL_SMALL + restaurant.pictureId : '../../public/images/hero-image_1.jpg'}">
+          data-srcset="${restaurant.pictureId ? CONFIG.BASE_IMAGE_URL_SMALL + restaurant.pictureId : '../../public/images/hero-image_1.jpg'}"
+          type="image/jpeg">
         <source 
           media="(min-width: 601px)" 
-          srcset="${restaurant.pictureId ? CONFIG.BASE_IMAGE_URL_MEDIUM + restaurant.pictureId : '../../public/images/hero-image_1.jpg'}">
+          data-srcset="${restaurant.pictureId ? CONFIG.BASE_IMAGE_URL_MEDIUM + restaurant.pictureId : '../../public/images/hero-image_1.jpg'}"
+          type="image/jpeg">
         <img class="restaurant-item__thumbnail lazyload"
           data-src="${restaurant.pictureId ? CONFIG.BASE_IMAGE_URL_MEDIUM + restaurant.pictureId : '../../public/images/hero-image_1.jpg'}"
-          src="${restaurant.pictureId ? CONFIG.BASE_IMAGE_URL_SMALL + restaurant.pictureId : '../../public/images/hero-image_1.jpg'}"
+          src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
           alt="${restaurant.name || 'Restaurant Image'}"
-          crossorigin="anonymous"
-          onload="this.setAttribute('data-loaded', 'true')">
+          crossorigin="anonymous">
       </picture>
       <div class="restaurant-item__rating">
         <p>⭐️<span class="rating-score">${restaurant.rating || 'N/A'}</span></p>
