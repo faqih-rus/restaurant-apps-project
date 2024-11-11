@@ -100,7 +100,7 @@ const createRestaurantDetailTemplate = (restaurant) => `
 `;
 
 const createRestaurantItemTemplate = (restaurant) => `
-  <div class="restaurant-item hidden">
+  <div class="restaurant-item">
     <div class="restaurant-item__header">
       <picture>
         <source 

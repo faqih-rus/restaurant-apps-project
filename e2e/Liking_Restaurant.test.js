@@ -58,22 +58,21 @@ Scenario('searching restaurants', async ({ I }) => {
 });
 
 Scenario('unliking a restaurant', async ({ I }) => {
-  I.see('You have no favorite restaurants yet.', '.empty-favorite');
-  I.amOnPage('/');
+	I.amOnPage('/#/favorite');
+	I.see('You have no favorite restaurants yet.', '.empty-favorite');
+	
+	I.amOnPage('/');
+	I.waitForInvisible('.loading', 30);
+	I.waitForVisible('.restaurant-item__title a', 30);
 
-  I.waitForElement('.restaurant-item__title a', 10);
-  I.click('.restaurant-item__title a');
+	I.click(locate('.restaurant-item__title a').first());
 
-  I.waitForElement('#likeButton', 10);
-  I.click('#likeButton');
+	I.waitForInvisible('.loading', 30);
+	I.waitForVisible('#likeButton', 30);
 
-  I.amOnPage('/#/favorite');
-  I.waitForElement('.restaurant-item', 10);
-
-  I.click('.restaurant-item__title a');
-  I.waitForElement('#likeButton', 10);
-  I.click('#likeButton');
-
-  I.amOnPage('/#/favorite');
-  I.see('You have no favorite restaurants yet.', '.empty-favorite');
-});
+	I.click('#likeButton');
+	I.click('#likeButton');
+	
+	I.amOnPage('/#/favorite');
+	I.see('You have no favorite restaurants yet.', '.empty-favorite');
+  });

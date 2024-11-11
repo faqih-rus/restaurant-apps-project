@@ -26,7 +26,7 @@ module.exports = merge(common, {
   plugins: [
     new WorkboxWebpackPlugin.InjectManifest({
       swSrc: path.resolve(__dirname, 'src/scripts/sw.js'),
-      swDest: 'sw.js',
+      swDest: 'sw.bundle.js',
       maximumFileSizeToCacheInBytes: 5000000,
       exclude: [/\.map$/, /manifest\.json$/],
     }),
