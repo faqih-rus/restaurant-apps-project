@@ -99,39 +99,44 @@ const createRestaurantDetailTemplate = (restaurant) => `
   </div>
 `;
 
-const createRestaurantItemTemplate = (restaurant) => `
-  <div class="restaurant-item">
-    <div class="restaurant-item__header">
-      <picture>
-        <source 
-          media="(max-width: 600px)" 
-          data-srcset="${restaurant.pictureId ? CONFIG.BASE_IMAGE_URL_SMALL + restaurant.pictureId : '../../public/images/hero-image_1.jpg'}"
-          type="image/jpeg">
-        <source 
-          media="(min-width: 601px)" 
-          data-srcset="${restaurant.pictureId ? CONFIG.BASE_IMAGE_URL_MEDIUM + restaurant.pictureId : '../../public/images/hero-image_1.jpg'}"
-          type="image/jpeg">
-        <img class="restaurant-item__thumbnail lazyload"
-          data-src="${restaurant.pictureId ? CONFIG.BASE_IMAGE_URL_MEDIUM + restaurant.pictureId : '../../public/images/hero-image_1.jpg'}"
-          src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-          alt="${restaurant.name || 'Restaurant Image'}"
-          crossorigin="anonymous">
-      </picture>
-      <div class="restaurant-item__rating">
-        <p>⭐️<span class="rating-score">${restaurant.rating || 'N/A'}</span></p>
+const createRestaurantItemTemplate = (restaurant) => {
+  const pictureId = restaurant.pictureId || '../public/images/heros/hero-image_4.jpg';
+  const imageUrlSmall = pictureId ? `${CONFIG.BASE_IMAGE_URL_SMALL}${pictureId}` : '../public/images/heros/hero-image_4.jpg';
+  const imageUrlMedium = pictureId ? `${CONFIG.BASE_IMAGE_URL_MEDIUM}${pictureId}` : '../public/images/heros/hero-image_4.jpg';
+
+  return `
+    <div class="restaurant-item">
+      <div class="restaurant-item__header">
+        <picture>
+          <source
+            media="(max-width: 600px)"
+            data-srcset="${imageUrlSmall}"
+            type="image/jpeg">
+          <source
+            media="(min-width: 601px)"
+            data-srcset="${imageUrlMedium}"
+            type="image/jpeg">
+          <img class="restaurant-item__thumbnail lazyload"
+            data-src="${imageUrlMedium}"
+            src="/images/placeholder-image.jpg"
+            alt="${restaurant.name || 'Restaurant Image'}">
+        </picture>
+        <div class="restaurant-item__rating">
+          <p>⭐️<span class="rating-score">${restaurant.rating || 'N/A'}</span></p>
+        </div>
+      </div>
+      <div class="restaurant-item__content">
+        <h3 class="restaurant-item__title">
+          <a href="#/detail/${restaurant.id}">${restaurant.name || 'N/A'}</a>
+        </h3>
+        <p class="restaurant-item__city">${restaurant.city || 'Unknown'}</p>
+        <p class="restaurant-item__description">
+          ${restaurant.description || 'No description available'}
+        </p>
       </div>
     </div>
-    <div class="restaurant-item__content">
-      <h3 class="restaurant-item__title">
-        <a href="#/detail/${restaurant.id}">${restaurant.name || 'N/A'}</a>
-      </h3>
-      <p class="restaurant-item__city">${restaurant.city || 'Unknown'}</p>
-      <p class="restaurant-item__description">
-        ${restaurant.description || 'No description available'}
-      </p>
-    </div>
-  </div>
-`;
+  `;
+};
 
 const createLoadingTemplate = () => `
   <div class="loading">

@@ -54,12 +54,32 @@ registerRoute(
 registerRoute(
   ({ request }) => request.destination === 'image',
   new CacheFirst({
-    cacheName: 'images-cache',
-    plugins: [
+	  cacheName: 'images-cache',
+	  plugins: [
       new CacheableResponsePlugin({
-        statuses: [0, 200],
+		  statuses: [0, 200],
       }),
-    ],
+      new ExpirationPlugin({
+		  maxEntries: 60,
+		  maxAgeSeconds: 30 * 24 * 60 * 60,
+      }),
+	  ],
+  })
+);
+// Cache detail page responses
+registerRoute(
+  ({ url }) => url.href.includes(`${BASE_URL}/detail/`),
+  new CacheFirst({
+	  cacheName: 'restaurant-detail-cache',
+	  plugins: [
+      new CacheableResponsePlugin({
+		  statuses: [0, 200],
+      }),
+      new ExpirationPlugin({
+		  maxEntries: 50,
+		  maxAgeSeconds: 7 * 24 * 60 * 60, // 7 days
+      }),
+	  ],
   })
 );
 
@@ -73,6 +93,36 @@ registerRoute(
         statuses: [0, 200],
       }),
     ],
+  })
+);
+
+// Cache other API requests
+registerRoute(
+  ({ url }) => url.origin === BASE_URL,
+  new StaleWhileRevalidate({
+    cacheName: 'restaurant-api-cache',
+    plugins: [
+      new CacheableResponsePlugin({
+        statuses: [0, 200],
+      }),
+    ],
+  })
+);
+
+// Cache list endpoint
+registerRoute(
+  ({ url }) => url.href === `${BASE_URL}/list`,
+  new CacheFirst({
+	  cacheName: 'restaurant-list-cache',
+	  plugins: [
+      new CacheableResponsePlugin({
+		  statuses: [0, 200],
+      }),
+      new ExpirationPlugin({
+		  maxEntries: 50,
+		  maxAgeSeconds: 7 * 24 * 60 * 60,
+      }),
+	  ],
   })
 );
 
