@@ -12,6 +12,8 @@ const { StaleWhileRevalidate, CacheFirst } = strategies;
 const { CacheableResponsePlugin } = cacheableResponse;
 const { ExpirationPlugin } = self.workbox.expiration;
 
+const BASE_URL = 'https://restaurant-api.dicoding.dev';
+
 // Do precaching
 precacheAndRoute(self.__WB_MANIFEST);
 
@@ -62,7 +64,6 @@ registerRoute(
 );
 
 // Cache API requests
-const BASE_URL = 'https://restaurant-api.dicoding.dev';
 registerRoute(
   ({ url }) => url.href.startsWith(BASE_URL),
   new StaleWhileRevalidate({

@@ -76,3 +76,30 @@ Scenario('unliking a restaurant', async ({ I }) => {
 	I.amOnPage('/#/favorite');
 	I.see('You have no favorite restaurants yet.', '.empty-favorite');
   });
+
+Scenario('liking multiple restaurants', async ({ I }) => {
+	I.amOnPage('/');
+  I.waitForElement('.restaurant-item__title a', 10);
+
+  const restaurantTitles = await I.grabTextFromAll('.restaurant-item__title a');
+  for (const title of restaurantTitles) {
+	I.click(locate('.restaurant-item__title a').withText(title));
+	I.waitForElement('#likeButton', 10);
+	I.click('#likeButton');
+	I.amOnPage('/');
+  }
+
+  I.amOnPage('/#/favorite');
+  I.waitForElement('.restaurant-item', 10);
+  const likedRestaurantTitles = await I.grabTextFromAll('.restaurant-item__title');
+
+  assert.strictEqual(restaurantTitles.length, likedRestaurantTitles.length);
+
+  restaurantTitles.forEach((title) => {
+	const normalizedTitle = title.trim();
+	assert.ok(
+	  likedRestaurantTitles.includes(normalizedTitle),
+	  `Restaurant "${normalizedTitle}" should be liked`
+	);
+  });
+});
