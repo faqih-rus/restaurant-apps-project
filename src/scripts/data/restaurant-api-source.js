@@ -15,10 +15,10 @@ class RestaurantSource {
       if (!responseJson.error && responseJson.restaurants) {
         return responseJson.restaurants;
       } else {
-        throw new Error('Struktur respons tidak valid dari API');
+        throw new Error('Invalid API response structure');
       }
     } catch (error) {
-      console.error('Error fetching restaurants:', error);
+      console.error('Error fetching restaurant list:', error);
 
       try {
         const cache = await caches.open(CONFIG.CACHE_NAME);
@@ -29,10 +29,10 @@ class RestaurantSource {
           return cachedData.restaurants;
         }
       } catch (cacheError) {
-        console.error('Error fetching from cache:', cacheError);
+        console.error('Error fetching restaurant list from cache:', cacheError);
       }
 
-      throw new Error('Gagal mengambil data restoran dari jaringan dan cache');
+      throw new Error('Failed to fetch restaurant list from network and cache');
     }
   }
 
@@ -48,7 +48,7 @@ class RestaurantSource {
       if (!responseJson.error && responseJson.restaurant) {
         return responseJson.restaurant;
       } else {
-        throw new Error('Struktur respons tidak valid dari API');
+        throw new Error('Invalid API response structure');
       }
     } catch (error) {
       console.error(`Error fetching restaurant detail for ID: ${id}`, error);
@@ -62,10 +62,10 @@ class RestaurantSource {
           return cachedData.restaurant;
         }
       } catch (cacheError) {
-        console.error('Error fetching from cache:', cacheError);
+        console.error('Error fetching restaurant detail from cache:', cacheError);
       }
 
-      throw new Error(`Gagal mengambil detail restoran dengan ID: ${id} dari jaringan dan cache`);
+      throw new Error(`Failed to fetch restaurant detail for ID: ${id} from network and cache`);
     }
   }
 
@@ -88,7 +88,7 @@ class RestaurantSource {
       if (!responseJson.error) {
         return responseJson;
       } else {
-        throw new Error(responseJson.message || 'Gagal mengirimkan ulasan');
+        throw new Error(responseJson.message || 'Failed to submit review');
       }
     } catch (error) {
       console.error('Error posting review:', error);
@@ -104,7 +104,7 @@ class RestaurantSource {
 
       return {
         error: false,
-        message: 'Ulasan disimpan secara offline. Akan dikirim ketika online.',
+        message: 'Review saved offline. It will be sent when online.',
       };
     }
   }
